@@ -20,15 +20,29 @@ public class Queue {
     private Node tail;
 
     public void add(int data){
-
+        Node newNode = new Node(data);
+        if(tail == null){
+            head = newNode;
+        }else{
+            tail.next = newNode;
+        }
+        tail = newNode;
     }
 
     public int remove() throws NoSuchElementException {
-        return 0;
+        if(isEmpty()){
+            throw new NoSuchElementException("Empty Queue");
+        }
+        int data = head.data;
+        head = head.next;
+        return data;
     }
 
     public int peek() throws NoSuchElementException{
-        return 0;
+        if(isEmpty()){
+            throw new NoSuchElementException("Empty queue");
+        }
+        return head.data;
     }
 
     public boolean isEmpty(){

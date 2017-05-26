@@ -19,18 +19,33 @@ public class Stack {
     Node top = null;
 
     public int peek() throws EmptyStackException{
-        return 0;
+        if(isEmpty()){
+            throw new EmptyStackException();
+        }
+        return top.data;
     }
 
     public void push(int data){
-
+        Node newNode = new Node(data);
+        if(top != null){
+            newNode.next = top;
+        }
+        top = newNode;
     }
 
     public int pop() throws EmptyStackException{
-        return 0;
+        if(isEmpty()){
+            throw new EmptyStackException();
+        }
+        int data = top.data;
+        top = top.next;
+        return data;
     }
 
     public boolean isEmpty(){
+        if(top == null){
+            return true;
+        }
         return false;
     }
 }
