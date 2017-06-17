@@ -1,6 +1,7 @@
 package com.aravindh.dsa.helper;
 
 import com.aravindh.dsa.nonlinear.BinarySearchTree;
+import com.aravindh.dsa.nonlinear.BinaryTree;
 
 /**
  * Created by aravindhravindran on 16/6/17.
@@ -15,10 +16,9 @@ public class BinaryTreeCreationHelper {
         return tree;
     }
 
-    public static BinarySearchTree getBSTWithValues(BinarySearchTree tree, int... values){
+    public static void getBinaryTreeWithValues(BinaryTree tree, int... values){
         for(int value : values){
             tree.insert(value);
         }
-        return tree;
     }
 }
