@@ -4,34 +4,25 @@ package com.aravindh.dsa.linear;
  * Created by aravindhravindran on 25/5/17.
  */
 public class LinkedList {
-    private class Node{
-        Integer data;
-        Node next;
 
-        Node(Integer data){
-            this.data = data;
-            this.next = null;
-        }
-    }
-
-    private Node head;
+    protected SinglyLinkedListNode head;
 
     public void prepend(int data){
         if(head == null){
-            head = new Node(null);
+            head = new SinglyLinkedListNode(null);
         }
-        Node newNode = new Node(data);
+        SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
         newNode.next = head.next;
         head.next = newNode;
     }
 
     public void append(int data){
         if(head == null){
-            head = new Node(null);
+            head = new SinglyLinkedListNode(null);
         }
-        Node newNode = new Node(data);
-        Node current = head.next;
-        Node prev = head;
+        SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
+        SinglyLinkedListNode current = head.next;
+        SinglyLinkedListNode prev = head;
         while(current != null){
             prev = current;
             current = current.next;
@@ -44,8 +35,8 @@ public class LinkedList {
         if(isEmpty()){
             throw new IllegalArgumentException("Empty list");
         }
-        Node current = head.next;
-        Node prev = head;
+        SinglyLinkedListNode current = head.next;
+        SinglyLinkedListNode prev = head;
         boolean isValueFound = false;
         while(current != null){
             if(value == current.data){
@@ -71,8 +62,8 @@ public class LinkedList {
         if(isEmpty()){
             return null;
         }
-        Node fastPtr = head.next;
-        Node slowPtr = head.next;
+        SinglyLinkedListNode fastPtr = head.next;
+        SinglyLinkedListNode slowPtr = head.next;
         while(fastPtr != null && fastPtr.next  != null && slowPtr != null){
             fastPtr = fastPtr.next.next;
             slowPtr = slowPtr.next;
@@ -81,10 +72,10 @@ public class LinkedList {
     }
 
     public void reverse(){
-        Node current = head.next;
-        Node prev = null;
+        SinglyLinkedListNode current = head.next;
+        SinglyLinkedListNode prev = null;
         while(current != null){
-            Node temp = current.next;
+            SinglyLinkedListNode temp = current.next;
             current.next = prev;
             prev = current;
             current = temp;
@@ -92,7 +83,7 @@ public class LinkedList {
     }
 
     public boolean search(int value){
-        Node current = head.next;
+        SinglyLinkedListNode current = head.next;
         while(current != null){
             if(current.data == value){
                 return true;

@@ -1,5 +1,6 @@
 package com.aravindh.dsa.linear;
 
+import com.aravindh.dsa.helper.LinkedListCreationHelper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,8 +57,7 @@ public class LinkedListTest {
 
     @Test
     public void middleNodeValueOnNonEmptyListReturnsMiddleNodeValue(){
-        LinkedList list = new LinkedList();
-        list.append(1);list.append(2);list.append(3);list.append(4);
+        LinkedList list = LinkedListCreationHelper.getLinkedListWithValues(1,2,3,4);
         Assert.assertEquals("With even number of nodes", Integer.valueOf(3), list.middleNodeValue());
         list.append(5);
         Assert.assertEquals("With odd number of nodes", Integer.valueOf(3), list.middleNodeValue());
