@@ -17,17 +17,18 @@ public class LinkedList {
     }
 
     public void append(int data){
+        SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
         if(head == null){
             head = new SinglyLinkedListNode(null);
+            head.next = newNode;
+            return;
         }
-        SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
         SinglyLinkedListNode current = head.next;
-        SinglyLinkedListNode prev = head;
+        SinglyLinkedListNode prev = head.next;
         while(current != null){
             prev = current;
             current = current.next;
         }
-
         prev.next = newNode;
     }
 
@@ -91,6 +92,20 @@ public class LinkedList {
             current = current.next;
         }
         return false;
+    }
+
+    public String toString(){
+        if(isEmpty()){
+            return "";
+        }
+        StringBuilder builder = new StringBuilder();
+        SinglyLinkedListNode curr = head.next;
+        while(curr != null){
+            builder.append(String.valueOf(curr.data));
+            builder.append(", ");
+            curr = curr.next;
+        }
+        return builder.toString();
     }
 
 }
