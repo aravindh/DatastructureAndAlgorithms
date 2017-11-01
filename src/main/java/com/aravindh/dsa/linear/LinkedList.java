@@ -5,21 +5,53 @@ package com.aravindh.dsa.linear;
  */
 public class LinkedList {
 
-    protected SinglyLinkedListNode head;
+    public SinglyLinkedListNode head;
 
     public void prepend(int data){
+        prepend(new SinglyLinkedListNode(data));
+    }
+
+    public void prepend(SinglyLinkedListNode newNode){
         if(head == null){
-            head = new SinglyLinkedListNode(null);
+            head = new SinglyLinkedListNode();
         }
-        SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
         newNode.next = head.next;
         head.next = newNode;
+    }
+
+    public int size(){
+        if(this.isEmpty()){
+            return 0;
+        }
+        int size = 0;
+        SinglyLinkedListNode curr = head.next;
+        while(curr != null){
+            size++;
+            curr = curr.next;
+        }
+        return size;
+    }
+
+    public void appendAll(LinkedList sourceList){
+        if(sourceList.isEmpty()){
+            return;
+        }
+        if(head == null){
+            head = new SinglyLinkedListNode();
+        }
+        SinglyLinkedListNode curr = head.next;
+        SinglyLinkedListNode prev = head;
+        while(curr != null){
+            prev = curr;
+            curr = curr.next;
+        }
+        prev.next = sourceList.head.next;
     }
 
     public void append(int data){
         SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
         if(head == null){
-            head = new SinglyLinkedListNode(null);
+            head = new SinglyLinkedListNode();
             head.next = newNode;
             return;
         }

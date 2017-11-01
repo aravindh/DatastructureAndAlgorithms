@@ -11,4 +11,8 @@ public class SinglyLinkedListNode {
         this.data = data;
         this.next = null;
     }
+
+    SinglyLinkedListNode(){
+
+    }
 }
