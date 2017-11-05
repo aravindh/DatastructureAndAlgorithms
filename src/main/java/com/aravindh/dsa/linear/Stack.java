@@ -6,17 +6,8 @@ import java.util.EmptyStackException;
  * Created by aravindhravindran on 25/5/17.
  */
 public class Stack {
-    private class Node{
-        int data;
-        Node next;
 
-        Node(int data){
-            this.data = data;
-            this.next = null;
-        }
-    }
-
-    Node top = null;
+    SinglyLinkedListNode top = null;
 
     public int peek() throws EmptyStackException{
         if(isEmpty()){
@@ -26,7 +17,7 @@ public class Stack {
     }
 
     public void push(int data){
-        Node newNode = new Node(data);
+        SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
         if(top != null){
             newNode.next = top;
         }
