@@ -22,21 +22,40 @@ public class SortTest {
 
     @Test
     public void testAllSorting(){
+        testBubbleSort();
+        testInsertionSort();
+        testSelectionSort();
+        testMergeSort();
+    }
+
+    @Test
+    public void testBubbleSort(){
         sort = new BubbleSort();
         sortAlgorithmName = "Bubble Sort";
         allTests();
-        //sort = new HeapSort();
-        //allTests();
+    }
+
+    @Test
+    public void testSelectionSort(){
         sort = new SelectionSort();
         sortAlgorithmName = "Selection sort";
         allTests();
+    }
 
+    @Test
+    public void testInsertionSort(){
         sort = new InsertionSort();
         sortAlgorithmName = "Insertion sort";
         allTests();
     }
 
     @Test
+    public void testMergeSort(){
+        sort = new MergeSort();
+        sortAlgorithmName = "Merge sort";
+        allTests();
+    }
+
     public void allTests(){
         sortWithEmptyListNoModificationOnList();
         sortWithSortedListNoModificationOnList();
@@ -45,41 +64,35 @@ public class SortTest {
         sortWithRandomNumbersInListSortsTheList();
     }
 
-    @Test
     public void sortWithEmptyListNoModificationOnList(){
         List<Integer> list = Collections.emptyList();
         sort.sort(list);
     }
 
-    @Test
     public void sortWithSortedListNoModificationOnList(){
         List<Integer> list = Arrays.asList(0, 1, 2, 4, 6, 8, 10);
         sort.sort(list);
         Assert.assertTrue(sortAlgorithmName+" ", isSorted(list));
     }
 
-    @Test
     public void sortWithSortedInReverseOrderSortsTheList(){
         List<Integer> list = Arrays.asList(10,8,6,4,2,1,0);
         sort.sort(list);
         Assert.assertTrue(sortAlgorithmName+" ", isSorted(list));
     }
 
-    @Test
     public void sortWithPositiveAndNegativeNumbersInListSortsTheList(){
         List<Integer> list = Arrays.asList(0, 1, 2, -4, 6, -8, 10);
         sort.sort(list);
         Assert.assertTrue(sortAlgorithmName+" ", isSorted(list));
     }
 
-    @Test
     public void sortWithRandomNumbersInListSortsTheList(){
         List<Integer> list = Arrays.asList(17, 65, 81, 43, 496, 10);
         sort.sort(list);
         Assert.assertTrue(sortAlgorithmName+" ", isSorted(list));
     }
 
-    @Test
     public void sortWithSingleNumberInListNoModificationOnList(){
         List<Integer> list = Arrays.asList(6);
         sort.sort(list);
