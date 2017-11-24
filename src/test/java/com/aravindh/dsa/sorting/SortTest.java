@@ -26,6 +26,7 @@ public class SortTest {
         testInsertionSort();
         testSelectionSort();
         testMergeSort();
+        testHeapSort();
     }
 
     @Test
@@ -56,8 +57,16 @@ public class SortTest {
         allTests();
     }
 
+    @Test
+    public void testHeapSort(){
+        sort = new HeapSort();
+        sortAlgorithmName = "Heap sort";
+        allTests();
+    }
+
     public void allTests(){
         sortWithEmptyListNoModificationOnList();
+        sortWithSingleNumberInListNoModificationOnList();
         sortWithSortedListNoModificationOnList();
         sortWithSortedInReverseOrderSortsTheList();
         sortWithPositiveAndNegativeNumbersInListSortsTheList();
@@ -79,6 +88,9 @@ public class SortTest {
         List<Integer> list = Arrays.asList(10,8,6,4,2,1,0);
         sort.sort(list);
         Assert.assertTrue(sortAlgorithmName+" ", isSorted(list));
+        list = Arrays.asList(10,8,6,4,2,1);
+        sort.sort(list);
+        Assert.assertTrue(sortAlgorithmName+" ", isSorted(list));
     }
 
     public void sortWithPositiveAndNegativeNumbersInListSortsTheList(){
@@ -89,6 +101,9 @@ public class SortTest {
 
     public void sortWithRandomNumbersInListSortsTheList(){
         List<Integer> list = Arrays.asList(17, 65, 81, 43, 496, 10);
+        sort.sort(list);
+        Assert.assertTrue(sortAlgorithmName+" ", isSorted(list));
+        list = Arrays.asList(17, 65, 81, 75, 43, 496, 10);
         sort.sort(list);
         Assert.assertTrue(sortAlgorithmName+" ", isSorted(list));
     }
@@ -104,6 +119,7 @@ public class SortTest {
         for(int i = 1; i < numbers.size(); i++){
             Integer curr = numbers.get(i);
             if(curr < prev){
+                System.out.println("unSorted "+numbers);
                 return false;
             }
             prev = curr;
