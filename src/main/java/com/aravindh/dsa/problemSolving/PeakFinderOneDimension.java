@@ -10,8 +10,15 @@ import java.util.List;
 * */
 
 public class PeakFinderOneDimension{
+    public Integer findPeak(List<Integer> numbers, boolean isIterative){
+        if(isIterative){
+            return peakFinderIterative(numbers);
+        }else{
+            return peakFinderRecursive(numbers, 0, numbers.size()-1);
+        }
+    }
 
-    public Integer findPeak(List<Integer> numbers){
+    private Integer peakFinderIterative(List<Integer> numbers){
         if(numbers == null && numbers.isEmpty()){
             return null;
         }
@@ -35,5 +42,23 @@ public class PeakFinderOneDimension{
 
         }
         return null;
+    }
+
+    private Integer peakFinderRecursive(List<Integer> numbers, int start, int end){
+       if(numbers == null || numbers.isEmpty() || start > end){
+           return null;
+       }
+       int midIdx = (start+end)/2;
+       int mid = numbers.get(midIdx);
+       int midLeft = midIdx-1 < start ? Integer.MIN_VALUE: numbers.get(midIdx-1);
+       int midRight = midIdx+1 > end ? Integer.MIN_VALUE: numbers.get(midIdx+1);
+
+       if(mid >= midLeft && mid >= midRight){
+           return mid;
+       }else if(midLeft >= mid){
+           return peakFinderRecursive(numbers, start, midIdx-1);
+       }else{
+           return peakFinderRecursive(numbers, midIdx+1, end);
+       }
     }
 }
