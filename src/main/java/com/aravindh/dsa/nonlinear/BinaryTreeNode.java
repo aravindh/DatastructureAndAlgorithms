@@ -8,7 +8,7 @@ public class BinaryTreeNode {
         public BinaryTreeNode left;
         public BinaryTreeNode right;
 
-        BinaryTreeNode(Integer data){
+        public BinaryTreeNode(Integer data){
             this.data = data;
         }
 

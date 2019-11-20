@@ -104,7 +104,19 @@ public class LinkedList {
         return slowPtr.data;
     }
 
-    public void reverse(){
+    public void reverse(boolean isIterative){
+        if(isIterative){
+            reverseIterative();
+        }else{
+            reverseRecursive();
+        }
+
+    }
+
+    private void reverseIterative(){
+        if(isEmpty()){
+            return;
+        }
         SinglyLinkedListNode current = head.next;
         SinglyLinkedListNode prev = null;
         while(current != null){
@@ -113,7 +125,53 @@ public class LinkedList {
             prev = current;
             current = temp;
         }
+        head.next = prev;
     }
+
+    private void reverseRecursive(){
+        if(isEmpty()){
+            return;
+        }
+        reverse(head.next);
+    }
+
+    private void reverse(SinglyLinkedListNode current){
+        if(current.next == null){
+            head.next = current;
+            return;
+        }
+        SinglyLinkedListNode next = current.next;
+        reverse(next);
+        next.next = current;
+        current.next = null;
+    }
+
+    public void rotate(int k){
+        if(isEmpty()){
+            return;
+        }
+        SinglyLinkedListNode current = head.next;
+        int count = 1;
+        //go till count
+        while(current != null && count <= (k-1)){
+            current = current.next;
+            count++;
+        }
+        if(current == null  || current.next == null){
+            return;
+        }
+        SinglyLinkedListNode newHead = current.next;
+        current.next = null;
+
+        //go to end
+        current = newHead;
+        while(current.next != null){
+            current = current.next;
+        }
+        current.next = head.next;
+        head.next = newHead;
+    }
+
 
     public boolean search(int value){
         SinglyLinkedListNode current = head.next;

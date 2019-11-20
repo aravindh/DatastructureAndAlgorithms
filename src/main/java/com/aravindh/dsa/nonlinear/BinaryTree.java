@@ -8,8 +8,11 @@ import java.util.Stack;
  * Created by aravindhravindran on 17/6/17.
  */
 public class BinaryTree {
-    protected BinaryTreeNode root;
+    public BinaryTreeNode root;
 
+    public BinaryTreeNode getNewNode(int data){
+        return new BinaryTreeNode(data);
+    }
     public void insert(int data){
         if(root == null){
             root = new BinaryTreeNode(data);
@@ -291,6 +294,33 @@ public class BinaryTree {
         }
     }
 
+    public boolean isIdentical(BinaryTree target){
+        return isIdenticalRecursive(this.root, target.root);
+    }
+
+    private boolean isIdenticalRecursive(BinaryTreeNode sourceRoot, BinaryTreeNode targetRoot){
+        if(sourceRoot == null && targetRoot == null){
+            return true;
+        }else if(sourceRoot != null && targetRoot == null){
+            return false;
+        }else if(sourceRoot == null && targetRoot != null){
+            return false;
+        }else{
+            if(sourceRoot.data != targetRoot.data){
+                return false;
+            } else{
+                if(isIdenticalRecursive(sourceRoot.left, targetRoot.left) == false){
+                    return false;
+                }
+                if(isIdenticalRecursive(sourceRoot.right, targetRoot.right) == false){
+                    return false;
+                }
+                return true;
+            }
+        }
+    }
+
+
     public int size(){
         return size(root);
     }
@@ -302,4 +332,21 @@ public class BinaryTree {
             return size(root.left)+ 1 + size(root.right);
         }
     }
+
+    /*public String boundaryTraversal(){
+
+    }
+
+    public int diameter(){
+
+
+    }
+
+    private int diameterRecursive(BinaryTreeNode root){
+        if(root == null){
+            return 0;
+        }
+
+
+    }*/
 }

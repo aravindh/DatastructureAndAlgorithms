@@ -25,8 +25,6 @@ import java.util.Stack;
  */
 public class BinarySearchTree extends BinaryTree {
 
-    protected BinaryTreeNode root;
-
     public void insert(int data){
         root = insertRecursive(data, root);
     }
@@ -106,8 +104,49 @@ public class BinarySearchTree extends BinaryTree {
         return false;
     }
 
-    public void delete(int value){
+    private BinaryTreeNode getMinNode(BinaryTreeNode root){
+        BinaryTreeNode current = root;
+        while(current.left != null){
+            current = current.left;
+        }
+        return current;
+    }
 
+    private BinaryTreeNode getMaxNode(BinaryTreeNode root){
+        BinaryTreeNode current = root;
+        while(current.right != null){
+            current = current.right;
+        }
+        return current;
+    }
+
+    public void delete(int value){
+        root = deleteRecursive(root, value);
+    }
+
+    private BinaryTreeNode deleteRecursive(BinaryTreeNode root, int targetValue){
+        if(root == null){
+            throw new IllegalArgumentException("Target value not found in binary search tree");
+        }
+        if(targetValue < root.data){
+            root.left = deleteRecursive(root.left, targetValue);
+        }else if(targetValue > root.data){
+            root.right = deleteRecursive(root.right, targetValue);
+        }else{
+            if(root.left == null && root.right == null){
+                return null;
+            }else if(root.left != null && root.right == null){
+                return root.left;
+            }else if(root.left == null && root.right != null){
+                return root.right;
+            }else{
+                final int maxNodeValue = getMaxNode(root.left).data;
+                root.left = deleteRecursive(root.left, maxNodeValue);
+                root.data = maxNodeValue;
+                return root;
+            }
+        }
+        return root;
     }
 
     public void printTree(){
@@ -118,6 +157,8 @@ public class BinarySearchTree extends BinaryTree {
         }
     }
 
+    
+
     public boolean equals(BinarySearchTree target){
         return isIdentical(this.root, target.root);
     }
@@ -126,14 +167,6 @@ public class BinarySearchTree extends BinaryTree {
 
    /* public void convertToMirrorTree(){
         return
-    }
-
-    public String boundaryTraversal(){
-
-    }
-
-    public int diameter(){
-
     }*/
 
 

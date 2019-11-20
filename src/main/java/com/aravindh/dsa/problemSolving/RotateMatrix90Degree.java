@@ -7,7 +7,7 @@ import java.util.List;
  * Created by aravindhravindran on 19/6/17.
  */
 public class RotateMatrix90Degree {
-    void rotate(List<List<Integer>> a, boolean isClockwise) {
+    public void rotate(List<List<Integer>> a, boolean isClockwise) {
         transpose(a);
         if(isClockwise){
             rotateColumns(a);
@@ -52,4 +52,19 @@ public class RotateMatrix90Degree {
         a.get(srcRow).set(srcCol, a.get(targetRow).get(targetCol));
         a.get(targetRow).set(targetCol, temp);
     }
+
+    /*
+    * 1 2 3
+    * 4 5 6
+    * 7 8 9
+    *
+    * 1 4 7
+    * 2 5 8
+    * 3 6 9
+    *
+    * 7 4 1
+    * 8 5 2
+    * 9 6 3
+    *
+    * */
 }

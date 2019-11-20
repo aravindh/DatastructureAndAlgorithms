@@ -1,8 +1,6 @@
 package com.aravindh.dsa.problemSolving;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class FindFirstAndLastOccurrenceOfNumberInSortedList {
     public List<Integer> getOccurrences(List<Integer> numbers, int target){
@@ -18,6 +16,13 @@ public class FindFirstAndLastOccurrenceOfNumberInSortedList {
             return Collections.EMPTY_LIST;
         }
         int endIndex = getEndIndex(numbers, target);
+        String s = "";
+        //s.substring();
+        int start=0, end=0;
+        Map<String, Boolean> longestPalindrome = new HashMap<>();
+        if(start == end || (s.charAt(start) == s.charAt(end) && longestPalindrome.get(s.substring(start+1, end-1)))){
+
+        }
         return Arrays.asList(startIndex, endIndex);
     }
 

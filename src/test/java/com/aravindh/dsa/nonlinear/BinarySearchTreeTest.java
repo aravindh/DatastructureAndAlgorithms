@@ -19,6 +19,8 @@ public class BinarySearchTreeTest {
         BinarySearchTree tree = new BinarySearchTree();
         Assert.assertTrue(tree.isEmpty());
         tree.insert(5);
+        int[] m = null;
+        System.out.println(m.length);
         Assert.assertFalse(tree.isEmpty());
     }
 
@@ -42,20 +44,94 @@ public class BinarySearchTreeTest {
         Assert.assertEquals("1,2,4,3,6,8,7,5,", tree.postOrder(true));
     }
 
-    @Test
-    public void deleteWithValueInLeafDeletesNodeSuccessfully(){
+    @Test(expected = IllegalArgumentException.class)
+    public void deleteOnEmptyTreeThrowsIllegalArgumentException(){
+        BinarySearchTree bst = BinaryTreeCreationHelper.getBSTWithValues();
+        bst.delete(10);
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void deleteOnNonEmptyWithTargetLessThanMinThrowsIllegalArgumentException(){
+        BinarySearchTree bst = BinaryTreeCreationHelper.getBSTWithValues(49, 46, 79, 43, 64, 83);
+        bst.delete(20);
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void deleteOnNonEmptyWithTargetGreaterThanMaxThrowsIllegalArgumentException(){
+        BinarySearchTree bst = BinaryTreeCreationHelper.getBSTWithValues(49, 46, 79, 43, 64, 83);
+        bst.delete(90);
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void deleteOnNonEmptyWithInValidTargetThrowsIllegalArgumentException(){
+        BinarySearchTree bst = BinaryTreeCreationHelper.getBSTWithValues(49, 46, 79, 43, 64, 83);
+        bst.delete(60);
     }
 
     @Test
-    public void deleteWithValueWithOneChildDeletesNodeSuccessfully(){
-
+    public void deleteWithTargetAsRootDeletesNode(){
+        BinarySearchTree bst = BinaryTreeCreationHelper.getBSTWithValues(49, 46, 79, 43, 64, 83, 42, 44);
+        bst.delete(49);
+        Assert.assertEquals("42,43,44,46,64,79,83,",bst.inOrder(true));
     }
 
+    @Test
+    public void deleteWithTargetAsLeafDeletesNode(){
+        BinarySearchTree bst = BinaryTreeCreationHelper.getBSTWithValues(49, 46, 79, 43, 64, 83);
+        bst.delete(43);
+        Assert.assertEquals("46,49,64,79,83,",bst.inOrder(true));
+    }
 
     @Test
-    public void deleteWithValueWithTwoChildDeletesNodeSuccessfully(){
+    public void deleteWithTargetWithOneChildDeletesNode(){
+        BinarySearchTree bst = BinaryTreeCreationHelper.getBSTWithValues(49, 46, 79, 43, 64, 83, 42, 44);
+        bst.delete(46);
+        Assert.assertEquals("42,43,44,49,64,79,83,",bst.inOrder(true));
+    }
 
+    @Test
+    public void deleteWithTargetWithTwoChildDeletesNode(){
+        BinarySearchTree bst = BinaryTreeCreationHelper.getBSTWithValues(49, 46, 79, 43, 64, 83);
+        bst.delete(79);
+        Assert.assertEquals("43,46,49,64,83,",bst.inOrder(true));
+    }
+
+    @Test
+    public void isIdenticalWithIdenticalTreesReturnTrue(){
+        BinarySearchTree src = BinaryTreeCreationHelper.getBSTWithValues(49, 46, 79, 43, 64, 83);
+        BinarySearchTree target = BinaryTreeCreationHelper.getBSTWithValues(49, 46, 79, 43, 64, 83);
+        Assert.assertTrue(src.isIdentical(target));
+    }
+
+    @Test
+    public void isIdenticalWithEmptyTreesReturnTrue(){
+        BinarySearchTree src = BinaryTreeCreationHelper.getBSTWithValues();
+        BinarySearchTree target = BinaryTreeCreationHelper.getBSTWithValues();
+        Assert.assertTrue(src.isIdentical(target));
+    }
+
+    @Test
+    public void isIdenticalWithEitherOfTreeIsEmptyReturnFalse(){
+        BinarySearchTree src = BinaryTreeCreationHelper.getBSTWithValues(49, 46, 79, 43, 64, 83);
+        BinarySearchTree target = BinaryTreeCreationHelper.getBSTWithValues();
+        Assert.assertFalse("With target tree as Empty" ,src.isIdentical(target));
+        target = BinaryTreeCreationHelper.getBSTWithValues(49, 46, 79, 43, 64, 83);
+        src = BinaryTreeCreationHelper.getBSTWithValues();
+        Assert.assertFalse("With source tree as Empty", src.isIdentical(target));
+    }
+
+    @Test
+    public void sizeOnEmptyTreeReturnZero(){
+        BinarySearchTree bst = BinaryTreeCreationHelper.getBSTWithValues();
+        Assert.assertEquals(0, bst.size());
+    }
+
+    @Test
+    public void sizeOnNonEmptyTreeReturnSize(){
+        BinarySearchTree bst = BinaryTreeCreationHelper.getBSTWithValues(49, 46, 79, 43, 64, 83);
+        Assert.assertEquals(6, bst.size());
     }
 
     @Test
